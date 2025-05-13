@@ -28,6 +28,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Run unit tests
+        run: npm test
+
       - name: Preview build (smoke test)
         run: |
           npx serve -s dist -l 5000 &
@@ -35,11 +38,3 @@ jobs:
           curl -I http://localhost:5000 || exit 1
         env:
           CI: true
-
-      - name: Run tests
-        run: |
-          if [ -f package.json ] && grep -q '"test"' package.json; then
-            npm test
-          else
-            echo "No test script found, skipping tests."
-          fi
