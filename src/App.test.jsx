@@ -1,6 +1,7 @@
 import React from 'react';
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from './App';
 
 describe('App', () => {
@@ -9,15 +10,15 @@ describe('App', () => {
     expect(screen.getByText(/Temas Ambientales Actuales/i)).toBeInTheDocument();
   });
 
-  it('navega a Métodos de Educación Modernos', () => {
+  it('navega a Métodos de Educación Modernos', async () => {
     render(<App />);
-    screen.getByText(/Educación Moderna/i).click();
+    await userEvent.click(screen.getByText(/Educación Moderna/i));
     expect(screen.getByText(/Métodos de Educación Modernos/i)).toBeInTheDocument();
   });
 
-  it('navega a Cuidado Psicológico', () => {
+  it('navega a Cuidado Psicológico', async () => {
     render(<App />);
-    screen.getByText(/Cuidado Psicológico/i).click();
+    await userEvent.click(screen.getByText(/Cuidado Psicológico/i));
     expect(screen.getByText(/Cuidado Psicológico en Niños/i)).toBeInTheDocument();
   });
 });
