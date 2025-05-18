@@ -32,9 +32,17 @@ jobs:
         run: npm test
 
       - name: Preview build (smoke test)
+        id: smoke-test
         run: |
           npx serve -s dist -l 5000 &
           sleep 5
           curl -I http://localhost:5000 || exit 1
         env:
           CI: true
+
+      - name: Run Condicional tests
+        if: steps.smoke-test.outcome == 'success'
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            npm run test:conditional
+          fi
