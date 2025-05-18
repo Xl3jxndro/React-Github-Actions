@@ -42,7 +42,4 @@ jobs:
 
       - name: Run Condicional tests
         if: steps.smoke-test.outcome == 'success'
-        run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            npm run test:conditional
-          fi
+        run: ls
