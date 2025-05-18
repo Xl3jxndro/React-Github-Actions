@@ -1,6 +1,7 @@
 import log from 'loglevel';
 
-// Configuración global del nivel de log
-log.setLevel(process.env.NODE_ENV === 'development' ? 'debug' : 'warn');
+// Detectar entorno de Vite y navegador
+const isDev = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV;
+log.setLevel(isDev ? 'debug' : 'warn');
 
 export default log;
